@@ -1,0 +1,3543 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NOIR — ресторан авторской кухни в Москве. Бронирование столика, эксклюзивное меню, незабываемая атмосфера. Michelin Star 2024.">
+<meta name="keywords" content="ресторан Москва, авторская кухня, забронировать столик, fine dining, банкет">
+<meta property="og:title" content="NOIR — Ресторан авторской кухни">
+<meta property="og:description" content="Место, где каждый ужин становится воспоминанием на всю жизнь. Michelin Star 2024.">
+<meta property="og:type" content="restaurant">
+<meta property="og:locale" content="ru_RU">
+<title>NOIR — Ресторан авторской кухни | Москва</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "NOIR",
+  "description": "Ресторан авторской кухни в Москве",
+  "url": "https://noir-restaurant.ru",
+  "telephone": "+7 (495) 000-00-00",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ул. Большая Никитская, 12",
+    "addressLocality": "Москва",
+    "addressCountry": "RU"
+  },
+  "servesCuisine": ["Авторская кухня", "Европейская", "Fusion"],
+  "priceRange": "$$$$",
+  "openingHours": ["Mo-Su 12:00-24:00"],
+  "hasMap": "https://maps.google.com",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "847"
+  }
+}
+</script>
+<style>
+/* ============================================
+   CSS VARIABLES — DESIGN SYSTEM
+   ============================================ */
+:root {
+  --black: #0a0a0a;
+  --black-deep: #050505;
+  --black-soft: #111111;
+  --black-card: #141414;
+  --black-border: #1e1e1e;
+  --gold: #c9a84c;
+  --gold-light: #e0c068;
+  --gold-pale: #f0d98a;
+  --gold-dark: #a07830;
+  --white: #ffffff;
+  --cream: #f5f0e8;
+  --cream-soft: #ede8df;
+  --burgundy: #6b1e2e;
+  --burgundy-light: #8b2a3e;
+  --charcoal: #2a2a2a;
+  --charcoal-light: #3a3a3a;
+  --olive: #4a4a2a;
+  --olive-light: #6a6a3a;
+  --text-primary: #f0ebe3;
+  --text-secondary: #a89878;
+  --text-muted: #6b6055;
+  --gradient-gold: linear-gradient(135deg, #c9a84c 0%, #e0c068 50%, #a07830 100%);
+  --gradient-dark: linear-gradient(180deg, #0a0a0a 0%, #141414 100%);
+  --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #1a1208 40%, #0f0c05 100%);
+  --gradient-card: linear-gradient(145deg, #161616 0%, #0e0e0e 100%);
+  --shadow-gold: 0 0 40px rgba(201, 168, 76, 0.15);
+  --shadow-card: 0 20px 60px rgba(0,0,0,0.6);
+  --shadow-btn: 0 8px 30px rgba(201, 168, 76, 0.3);
+  --radius: 4px;
+  --radius-lg: 12px;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-elegant: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+body {
+  font-family: var(--font-body);
+  background: var(--black-deep);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { border: none; background: none; font-family: inherit; cursor: pointer; }
+input, textarea, select { font-family: inherit; }
+
+/* ============================================
+   LOADING SCREEN
+   ============================================ */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--black-deep);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: loaderPulse 1.5s ease-in-out infinite;
+}
+.loader-line {
+  width: 0;
+  height: 1px;
+  background: var(--gradient-gold);
+  margin-top: 2rem;
+  animation: loaderLine 2.2s ease forwards;
+}
+.loader-sub {
+  font-family: var(--font-elegant);
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  color: var(--text-secondary);
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeInUp 1s ease 0.8s forwards;
+}
+@keyframes loaderPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+@keyframes loaderLine { 0%{width:0} 100%{width:200px} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black-deep); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection { background: rgba(201,168,76,0.3); color: var(--gold-pale); }
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+.display-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.elegant-title {
+  font-family: var(--font-elegant);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-style: italic;
+  color: var(--gold);
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.body-text {
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+.gold-text {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: var(--gradient-gold);
+  color: var(--black-deep);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-btn);
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 45px rgba(201,168,76,0.4); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 2.2rem;
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+.btn-secondary:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  transform: translateY(-2px);
+}
+.btn-arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   FIXED BOOKING BUTTON
+   ============================================ */
+.fixed-book {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+  pointer-events: none;
+}
+.fixed-book.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.fixed-book .btn-primary {
+  padding: 0.85rem 1.8rem;
+  font-size: 0.75rem;
+  border-radius: 50px;
+  box-shadow: 0 8px 30px rgba(201,168,76,0.4), 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  padding: 1.5rem 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+.nav.scrolled {
+  background: rgba(5,5,5,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  padding: 1rem 4%;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.nav-links a {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-book { padding: 0.6rem 1.5rem; font-size: 0.7rem; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+}
+.hamburger span {
+  width: 24px;
+  height: 1.5px;
+  background: var(--gold);
+  transition: var(--transition);
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,5,0.97);
+  backdrop-filter: blur(30px);
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  transition: var(--transition);
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ============================================
+   SECTION BASE
+   ============================================ */
+section { position: relative; overflow: hidden; }
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 4%;
+}
+.section-pad { padding: clamp(5rem, 10vw, 9rem) 0; }
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+.gold-line {
+  width: 60px;
+  height: 1px;
+  background: var(--gradient-gold);
+  margin: 1.5rem 0;
+}
+.gold-line.center { margin: 1.5rem auto; }
+.section-header { text-align: center; margin-bottom: clamp(3rem, 6vw, 5rem); }
+.section-header .gold-line { margin: 1.2rem auto; }
+
+/* ============================================
+   REVEAL ANIMATION
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 90, 10, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(107, 30, 46, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(74, 74, 42, 0.08) 0%, transparent 50%),
+    var(--black-deep);
+  overflow: hidden;
+}
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.5;
+}
+.hero-ambient {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+.hero-ambient-2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107,30,46,0.08) 0%, transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(20px,-20px) scale(1.05)}
+  66%{transform:translate(-15px,15px) scale(0.97)}
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 4%;
+  padding-top: 10rem;
+  padding-bottom: 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-left {}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 50px;
+  background: rgba(201,168,76,0.05);
+  backdrop-filter: blur(10px);
+  margin-bottom: 2rem;
+}
+.hero-badge .star { color: var(--gold); font-size: 0.9rem; }
+.hero-badge span {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6.5vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+.hero-title .line-italic {
+  font-style: italic;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-family: var(--font-elegant);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  font-style: italic;
+}
+.hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+.hero-stats .stars { color: var(--gold); letter-spacing: 2px; }
+.hero-right {
+  position: relative;
+}
+.hero-visual {
+  position: relative;
+  height: 580px;
+}
+.hero-plate-main {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(201,168,76,0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(139, 80, 20, 0.3) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1408 0%, #0e0c06 50%, #120e06 100%);
+  overflow: hidden;
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(201,168,76,0.1);
+}
+.hero-plate-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(201,168,76,0.12) 0%, transparent 55%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.plate-decoration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 280px;
+}
+.plate-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.plate-circle:nth-child(1) {
+  inset: 0;
+  animation: rotateSlow 20s linear infinite;
+  border-color: rgba(201,168,76,0.15);
+  border-top-color: rgba(201,168,76,0.5);
+}
+.plate-circle:nth-child(2) {
+  inset: 30px;
+  animation: rotateSlow 15s linear infinite reverse;
+  border-color: rgba(201,168,76,0.1);
+  border-right-color: rgba(201,168,76,0.4);
+}
+.plate-circle:nth-child(3) {
+  inset: 60px;
+  animation: rotateSlow 25s linear infinite;
+  border-color: rgba(201,168,76,0.08);
+  border-bottom-color: rgba(201,168,76,0.3);
+}
+.plate-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, rgba(201,168,76,0.05) 50%, transparent 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.plate-center-text {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.6;
+}
+@keyframes rotateSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.hero-food-visual {
+  position: absolute;
+  inset: 20px;
+  background:
+    radial-gradient(ellipse at 40% 35%, rgba(180, 120, 40, 0.4) 0%, rgba(120, 80, 20, 0.2) 30%, transparent 60%),
+    radial-gradient(ellipse at 70% 65%, rgba(80, 50, 10, 0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 70%, rgba(60, 20, 10, 0.4) 0%, transparent 40%);
+  border-radius: 16px;
+}
+.hero-food-items {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.food-item {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.6) 0%, rgba(139,90,10,0.8) 40%, rgba(80,50,10,0.9) 70%, transparent 100%);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.food-item-1 { width: 140px; height: 140px; top: 30%; left: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle at 35% 35%, rgba(220,180,80,0.9) 0%, rgba(160,110,30,0.8) 40%, rgba(100,70,20,0.9) 70%, rgba(50,30,10,1) 100%); }
+.food-item-2 { width: 60px; height: 60px; top: 20%; right: 20%; background: radial-gradient(circle at 40% 40%, rgba(180,220,120,0.9) 0%, rgba(100,150,50,0.8) 50%, rgba(60,90,20,1) 100%); }
+.food-item-3 { width: 45px; height: 45px; bottom: 25%; left: 25%; background: radial-gradient(circle at 40% 40%, rgba(220,100,80,0.9) 0%, rgba(160,60,40,0.8) 50%, rgba(100,30,20,1) 100%); }
+.sauce-drizzle {
+  position: absolute;
+  bottom: 30%;
+  left: 35%;
+  right: 35%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.8), rgba(180,80,40,0.6), transparent);
+  border-radius: 2px;
+  transform: rotate(-15deg);
+}
+.sauce-drizzle-2 {
+  position: absolute;
+  top: 60%;
+  left: 20%;
+  right: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(100,180,80,0.6), transparent);
+  border-radius: 2px;
+  transform: rotate(10deg);
+}
+.hero-overlay-card {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  background: rgba(10,10,10,0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.overlay-dish-name {
+  font-family: var(--font-elegant);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+.overlay-dish-sub {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.overlay-price {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.hero-float-tag {
+  position: absolute;
+  top: 2rem;
+  right: -1rem;
+  background: var(--gradient-gold);
+  color: var(--black-deep);
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: var(--shadow-btn);
+}
+.float-tag-num {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  display: block;
+}
+.float-tag-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: bounce 2s ease-in-out infinite;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dark));
+}
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+/* ============================================
+   ADVANTAGES SECTION
+   ============================================ */
+#advantages {
+  background: var(--black-soft);
+  border-top: 1px solid var(--black-border);
+  border-bottom: 1px solid var(--black-border);
+}
+.advantages-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.advantage-item {
+  padding: 3.5rem 2.5rem;
+  border-right: 1px solid var(--black-border);
+  position: relative;
+  transition: var(--transition);
+}
+.advantage-item:last-child { border-right: none; }
+.advantage-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.advantage-item:hover::before { transform: scaleX(1); }
+.advantage-item:hover { background: rgba(201,168,76,0.03); }
+.adv-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.adv-icon svg { width: 100%; height: 100%; }
+.adv-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.adv-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.adv-desc { font-size: 0.9rem; line-height: 1.7; color: var(--text-secondary); font-weight: 300; }
+
+/* ============================================
+   STORY SECTION
+   ============================================ */
+#story { background: var(--black-deep); }
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+.story-visual {
+  position: relative;
+  height: 600px;
+}
+.story-img-main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 60px;
+  bottom: 60px;
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(160,120,40,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(107,30,46,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 10%, rgba(201,168,76,0.15) 0%, transparent 40%),
+    linear-gradient(160deg, #1a1206 0%, #0e0a04 50%, #140c06 100%);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.story-img-main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201,168,76,0.02) 60px, rgba(201,168,76,0.02) 61px),
+    radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 60%);
+}
+.story-chef-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 85%;
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(201,168,76,0.2) 0%, transparent 35%),
+    linear-gradient(180deg, rgba(201,168,76,0.05) 0%, rgba(20,12,6,0.9) 100%);
+  border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+}
+.story-img-accent {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  background:
+    radial-gradient(ellipse at 40% 40%, rgba(201,168,76,0.5) 0%, rgba(139,90,10,0.6) 40%, rgba(80,50,10,0.8) 100%);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.story-img-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,220,120,0.3) 0%, transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(180,100,40,0.4) 0%, transparent 40%);
+}
+.story-year {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(201,168,76,0.3);
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  line-height: 1;
+  z-index: 1;
+}
+.story-award {
+  position: absolute;
+  top: 2rem;
+  right: -1.5rem;
+  background: var(--black-card);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  z-index: 10;
+}
+.award-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+.award-text { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; font-weight: 600; }
+.story-text .eyebrow { margin-bottom: 1rem; }
+.story-text .section-title { margin-bottom: 1.5rem; }
+.story-text .body-text { margin-bottom: 2rem; }
+.story-text .elegant-title { margin-bottom: 2rem; border-left: 2px solid var(--gold); padding-left: 1.5rem; font-size: clamp(1rem, 2vw, 1.3rem); }
+.story-milestones { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2.5rem; }
+.milestone {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: rgba(201,168,76,0.04);
+  border-radius: 6px;
+  border-left: 2px solid rgba(201,168,76,0.3);
+  transition: var(--transition);
+}
+.milestone:hover { background: rgba(201,168,76,0.08); border-left-color: var(--gold); }
+.milestone-year {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 40px;
+}
+.milestone-text { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* ============================================
+   DISHES SECTION
+   ============================================ */
+#dishes { background: var(--black-soft); }
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.dish-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  transition: var(--transition);
+  group: true;
+}
+.dish-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-card), var(--shadow-gold); border-color: rgba(201,168,76,0.2); }
+.dish-visual {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+.dish-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 60%);
+}
+.dv-1 { background: radial-gradient(ellipse at 40% 35%, rgba(220,180,80,0.8) 0%, rgba(160,100,20,0.7) 30%, rgba(80,50,10,0.9) 60%, rgba(20,12,5,1) 100%); }
+.dv-2 { background: radial-gradient(ellipse at 50% 40%, rgba(180,80,60,0.7) 0%, rgba(120,50,40,0.8) 40%, rgba(60,20,15,0.9) 70%, rgba(15,8,6,1) 100%); }
+.dv-3 { background: radial-gradient(ellipse at 45% 40%, rgba(100,160,80,0.6) 0%, rgba(160,180,100,0.4) 20%, rgba(60,80,40,0.7) 50%, rgba(80,120,60,0.8) 70%, rgba(20,30,15,1) 100%); }
+.dv-4 { background: radial-gradient(ellipse at 50% 35%, rgba(200,140,60,0.7) 0%, rgba(140,90,30,0.6) 30%, rgba(200,160,80,0.4) 50%, rgba(100,70,20,0.9) 70%, rgba(20,15,5,1) 100%); }
+.dv-5 { background: radial-gradient(ellipse at 40% 40%, rgba(80,60,160,0.4) 0%, rgba(140,100,200,0.3) 20%, rgba(180,100,60,0.6) 50%, rgba(100,60,20,0.8) 70%, rgba(15,10,5,1) 100%); }
+.dv-6 { background: radial-gradient(ellipse at 50% 40%, rgba(240,220,100,0.6) 0%, rgba(180,140,40,0.7) 30%, rgba(100,80,20,0.8) 60%, rgba(20,15,5,1) 100%); }
+.dish-decorations {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.dish-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: dishFloat 4s ease-in-out infinite;
+}
+.dish-dot:nth-child(1) { width: 80px; height: 80px; top: 25%; left: 40%; background: radial-gradient(circle, rgba(201,168,76,0.7) 0%, rgba(160,110,30,0.9) 50%, rgba(100,70,20,1) 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2); }
+.dish-dot:nth-child(2) { width: 25px; height: 25px; top: 15%; right: 25%; background: radial-gradient(circle, rgba(180,220,120,0.9) 0%, rgba(120,170,60,1) 100%); animation-delay: 0.5s; }
+.dish-dot:nth-child(3) { width: 15px; height: 15px; bottom: 35%; left: 30%; background: radial-gradient(circle, rgba(220,100,80,0.9) 0%, rgba(180,60,40,1) 100%); animation-delay: 1s; }
+@keyframes dishFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+.dish-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+  background: var(--gradient-gold);
+  color: var(--black-deep);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+}
+.dish-info { padding: 1.5rem; }
+.dish-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+.dish-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+.dish-footer { display: flex; align-items: center; justify-content: space-between; }
+.dish-price {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.dish-tags { display: flex; gap: 0.4rem; }
+.dish-tag {
+  font-size: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 2px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.dishes-cta { text-align: center; }
+
+/* ============================================
+   MENU SECTION
+   ============================================ */
+#menu { background: var(--black-deep); }
+.menu-categories {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+.menu-cat-btn {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: 1px solid var(--black-border);
+  border-radius: 3px;
+  transition: var(--transition);
+  background: transparent;
+}
+.menu-cat-btn:hover, .menu-cat-btn.active {
+  color: var(--black-deep);
+  background: var(--gradient-gold);
+  border-color: transparent;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+.menu-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--black-border);
+  border-right: 1px solid var(--black-border);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.menu-item:nth-child(even) { border-right: none; }
+.menu-item:hover { background: rgba(201,168,76,0.03); }
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gradient-gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+.menu-item:hover::before { transform: scaleY(1); }
+.menu-item-dot {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.mid-1 { background: radial-gradient(circle at 35% 35%, rgba(220,180,80,0.9) 0%, rgba(160,110,30,0.8) 50%, rgba(80,50,10,1) 100%); }
+.mid-2 { background: radial-gradient(circle at 35% 35%, rgba(180,80,60,0.9) 0%, rgba(120,50,40,0.8) 50%, rgba(60,20,15,1) 100%); }
+.mid-3 { background: radial-gradient(circle at 35% 35%, rgba(100,160,80,0.9) 0%, rgba(60,110,30,0.8) 50%, rgba(20,60,10,1) 100%); }
+.mid-4 { background: radial-gradient(circle at 35% 35%, rgba(200,160,60,0.9) 0%, rgba(160,120,30,0.8) 50%, rgba(80,60,10,1) 100%); }
+.mid-5 { background: radial-gradient(circle at 35% 35%, rgba(80,140,200,0.9) 0%, rgba(40,80,140,0.8) 50%, rgba(10,40,80,1) 100%); }
+.mid-6 { background: radial-gradient(circle at 35% 35%, rgba(200,120,60,0.9) 0%, rgba(150,80,30,0.8) 50%, rgba(80,40,10,1) 100%); }
+.mid-7 { background: radial-gradient(circle at 35% 35%, rgba(160,80,200,0.9) 0%, rgba(100,40,150,0.8) 50%, rgba(50,10,80,1) 100%); }
+.mid-8 { background: radial-gradient(circle at 35% 35%, rgba(240,200,80,0.9) 0%, rgba(200,150,40,0.8) 50%, rgba(120,90,10,1) 100%); }
+.menu-item-body { flex: 1; }
+.menu-item-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+.menu-item-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+.menu-item-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ============================================
+   GALLERY SECTION
+   ============================================ */
+#gallery { background: var(--black-soft); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, 200px);
+  gap: 0.75rem;
+}
+.gallery-item {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,10,0.3);
+  transition: var(--transition);
+}
+.gallery-item:hover::after { background: rgba(10,10,10,0.1); }
+.gallery-item:hover .gallery-item-inner { transform: scale(1.05); }
+.gallery-item-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.gi-1 { grid-column: span 4; grid-row: span 2; background: radial-gradient(ellipse at 40% 35%, rgba(201,168,76,0.5) 0%, rgba(139,90,10,0.6) 40%, rgba(60,40,8,0.9) 80%, #0a0a0a 100%); }
+.gi-2 { grid-column: span 4; grid-row: span 1; background: radial-gradient(ellipse at 50% 40%, rgba(107,30,46,0.6) 0%, rgba(70,20,30,0.7) 50%, #0a0a0a 100%); }
+.gi-3 { grid-column: span 4; grid-row: span 1; background: radial-gradient(ellipse at 40% 50%, rgba(74,74,42,0.7) 0%, rgba(50,50,20,0.8) 50%, #0a0a0a 100%); }
+.gi-4 { grid-column: span 4; grid-row: span 1; background: radial-gradient(ellipse at 45% 45%, rgba(160,80,40,0.6) 0%, rgba(100,50,20,0.7) 50%, #0a0a0a 100%); }
+.gi-5 { grid-column: span 4; grid-row: span 1; background: radial-gradient(ellipse at 50% 40%, rgba(80,120,160,0.4) 0%, rgba(40,60,80,0.6) 40%, rgba(201,168,76,0.2) 70%, #0a0a0a 100%); }
+.gi-6 { grid-column: span 3; grid-row: span 1; background: radial-gradient(ellipse at 40% 40%, rgba(201,168,76,0.4) 0%, rgba(139,90,10,0.5) 50%, #0a0a0a 100%); }
+.gi-7 { grid-column: span 5; grid-row: span 1; background: radial-gradient(ellipse at 35% 40%, rgba(107,30,46,0.5) 0%, rgba(60,15,25,0.7) 50%, #0a0a0a 100%); }
+.gi-8 { grid-column: span 4; grid-row: span 1; background: radial-gradient(ellipse at 50% 45%, rgba(74,74,42,0.6) 0%, rgba(40,40,20,0.8) 50%, #0a0a0a 100%); }
+.gallery-overlay {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-label {
+  font-family: var(--font-elegant);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* ============================================
+   TEAM SECTION
+   ============================================ */
+#team { background: var(--black-deep); }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.team-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  transition: var(--transition);
+}
+.team-card:hover { transform: translateY(-6px); border-color: rgba(201,168,76,0.2); box-shadow: var(--shadow-card); }
+.team-photo {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+.tp-1 { background: radial-gradient(ellipse at 50% 20%, rgba(201,168,76,0.3) 0%, rgba(100,80,40,0.4) 30%, rgba(30,20,10,0.9) 70%, #0a0a0a 100%); }
+.tp-2 { background: radial-gradient(ellipse at 50% 20%, rgba(160,140,200,0.2) 0%, rgba(80,60,100,0.3) 30%, rgba(30,20,40,0.9) 70%, #0a0a0a 100%); }
+.tp-3 { background: radial-gradient(ellipse at 50% 20%, rgba(80,160,120,0.2) 0%, rgba(40,80,60,0.3) 30%, rgba(15,30,20,0.9) 70%, #0a0a0a 100%); }
+.tp-4 { background: radial-gradient(ellipse at 50% 20%, rgba(200,120,60,0.2) 0%, rgba(100,60,20,0.3) 30%, rgba(30,15,5,0.9) 70%, #0a0a0a 100%); }
+.team-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+  height: 85%;
+  background: linear-gradient(180deg,
+    rgba(201,168,76,0.1) 0%,
+    rgba(60,40,15,0.6) 40%,
+    rgba(20,12,5,0.95) 100%);
+  border-radius: 50% 50% 0 0 / 15% 15% 0 0;
+}
+.team-hat {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 35px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+}
+.team-hat::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: -10px;
+  right: -10px;
+  height: 8px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 2px;
+}
+.team-info { padding: 1.5rem; }
+.team-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.team-role {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.team-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+.team-awards { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+.team-award-tag {
+  font-size: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 2px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   REVIEWS SECTION
+   ============================================ */
+#reviews { background: var(--black-soft); }
+.reviews-rating-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  padding: 2.5rem;
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 12px;
+}
+.rating-big {
+  text-align: center;
+}
+.rating-big .num {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 900;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.rating-big .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 3px; margin: 0.3rem 0; }
+.rating-big .count { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; }
+.rating-platforms { display: flex; flex-direction: column; gap: 1rem; }
+.rating-platform { display: flex; align-items: center; gap: 1rem; }
+.rp-name { font-size: 0.8rem; color: var(--text-secondary); min-width: 80px; }
+.rp-bar { flex: 1; height: 3px; background: var(--black-border); border-radius: 2px; overflow: hidden; min-width: 120px; }
+.rp-fill { height: 100%; background: var(--gradient-gold); border-radius: 2px; transition: width 1.5s ease; }
+.rp-score { font-size: 0.8rem; font-weight: 600; color: var(--gold); min-width: 30px; }
+.reviews-slider { position: relative; overflow: hidden; }
+.reviews-track {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.review-card {
+  min-width: calc(33.333% - 1rem);
+  flex-shrink: 0;
+  padding: 2rem;
+  background: var(--black-card);
+  border: 1px solid var(--black-border);
+  border-radius: 12px;
+  transition: var(--transition);
+  width: 20px;
+}
+.review-card:hover { border-color: rgba(201,168,76,0.2); transform: translateY(-4px); }
+.review-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+.reviewer-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--black-deep);
+}
+.av-1 { background: var(--gradient-gold); }
+.av-2 { background: linear-gradient(135deg, #8b2a3e, #6b1e2e); color: var(--cream); }
+.av-3 { background: linear-gradient(135deg, #4a6a3a, #3a5a2a); color: var(--cream); }
+.av-4 { background: linear-gradient(135deg, #3a5a8a, #2a4a7a); color: var(--cream); }
+.av-5 { background: linear-gradient(135deg, #8a6a3a, #6a4a2a); color: var(--black-deep); }
+.reviewer-info .name { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+.reviewer-info .platform { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; }
+.review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.8rem; }
+.review-text { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.7; font-style: italic; }
+.review-dish { margin-top: 1rem; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+.reviews-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2.5rem; }
+.reviews-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: var(--gold);
+  font-size: 1rem;
+}
+.reviews-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+.reviews-dots { display: flex; gap: 0.5rem; }
+.reviews-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--black-border);
+  transition: var(--transition);
+  cursor: pointer;
+}
+.reviews-dot.active { background: var(--gold); width: 24px; border-radius: 3px; }
+
+/* ============================================
+   OFFERS SECTION
+   ============================================ */
+#offers { background: var(--black-deep); }
+.offers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+.offer-card {
+  border-radius: 16px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid var(--black-border);
+}
+.offer-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+.oc-1 {
+  background: linear-gradient(145deg, #1a1206 0%, #0e0c06 100%);
+  border-color: rgba(201,168,76,0.2);
+}
+.oc-2 {
+  background: linear-gradient(145deg, #1a0a0e 0%, #0e0608 100%);
+  border-color: rgba(107,30,46,0.3);
+}
+.oc-3 {
+  background: linear-gradient(145deg, #0e1206 0%, #0a0e04 100%);
+  border-color: rgba(74,74,42,0.3);
+}
+.offer-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+.oc-1::before { background: var(--gradient-gold); }
+.oc-2::before { background: linear-gradient(90deg, var(--burgundy), var(--burgundy-light)); }
+.oc-3::before { background: linear-gradient(90deg, var(--olive), var(--olive-light)); }
+.offer-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.ob-gold { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+.ob-red { background: rgba(107,30,46,0.2); color: #d4607a; border: 1px solid rgba(107,30,46,0.4); }
+.ob-green { background: rgba(74,74,42,0.2); color: #9aab5a; border: 1px solid rgba(74,74,42,0.4); }
+.offer-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.offer-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; }
+.offer-countdown {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.cd-unit { text-align: center; }
+.cd-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  display: block;
+  color: var(--gold);
+  line-height: 1;
+}
+.cd-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.cd-sep { font-size: 1.2rem; color: var(--text-muted); align-self: center; padding-bottom: 0.8rem; }
+.offer-price-wrap { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1.5rem; }
+.offer-price-old { font-size: 1rem; color: var(--text-muted); text-decoration: line-through; }
+.offer-price-new {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--gold);
+}
+.offer-price-save { font-size: 0.8rem; color: #9aab5a; margin-left: 0.5rem; }
+
+/* ============================================
+   EVENTS SECTION
+   ============================================ */
+#events { background: var(--black-soft); }
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.events-visual {
+  position: relative;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(107,30,46,0.25) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1206 0%, #0e0a04 50%, #140c08 100%);
+  box-shadow: var(--shadow-card);
+}
+.events-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 50%),
+    radial-gradient(circle at 50% 40%, rgba(201,168,76,0.1) 0%, transparent 60%);
+}
+.events-visual-content {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.events-table-visual {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 200px;
+  height: 120px;
+}
+.evt-table {
+  width: 160px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(139,90,10,0.8) 0%, rgba(80,50,10,0.9) 100%);
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.evt-candle {
+  position: absolute;
+  width: 8px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(255,220,100,0.9) 0%, rgba(220,160,60,0.8) 100%);
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -90%);
+}
+.evt-candle::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(ellipse, rgba(255,200,50,0.9) 0%, rgba(255,100,20,0.7) 50%, transparent 100%);
+  border-radius: 50% 50% 20% 20%;
+  animation: flame 0.5s ease-in-out infinite alternate;
+}
+@keyframes flame { 0%{transform:translateX(-50%) scaleY(1)} 100%{transform:translateX(-50%) scaleY(1.2) scaleX(0.9)} }
+.events-info { display: flex; flex-direction: column; gap: 1.5rem; }
+.event-feature {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.8rem;
+  background: var(--black-card);
+  border-radius: 12px;
+  border: 1px solid var(--black-border);
+  transition: var(--transition);
+  align-items: flex-start;
+}
+.event-feature:hover { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.03); }
+.event-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.event-text .event-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.event-text .event-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ============================================
+   FAQ SECTION
+   ============================================ */
+#faq { background: var(--black-deep); }
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--black-border);
+  overflow: hidden;
+}
+.faq-item:first-child { border-top: 1px solid var(--black-border); }
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+  gap: 1rem;
+}
+.faq-q:hover { color: var(--gold); }
+.faq-q.active { color: var(--gold); }
+.faq-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--gold);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+.faq-q.active .faq-icon { transform: rotate(45deg); background: rgba(201,168,76,0.1); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.faq-a-inner {
+  padding: 0 0 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ============================================
+   CONTACTS SECTION
+   ============================================ */
+#contacts { background: var(--black-soft); }
+.contacts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+.contact-info { display: flex; flex-direction: column; gap: 2.5rem; }
+.contact-block {}
+.contact-block-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.contact-block-text {
+  font-family: var(--font-elegant);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.contact-block-text a { transition: color 0.3s; }
+.contact-block-text a:hover { color: var(--gold); }
+.hours-grid { display: flex; flex-direction: column; gap: 0.5rem; }
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(201,168,76,0.05);
+}
+.hours-day { color: var(--text-primary); }
+.hours-time { color: var(--gold); }
+.contact-map {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 500px;
+  background:
+    linear-gradient(160deg,
+      #0e0e0e 0%,
+      #141210 20%,
+      #0e0e0e 40%,
+      #121010 60%,
+      #0e0e0e 100%);
+  position: relative;
+  border: 1px solid var(--black-border);
+}
+.map-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pin-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gradient-gold);
+  box-shadow: 0 0 0 6px rgba(201,168,76,0.2), 0 0 0 12px rgba(201,168,76,0.08);
+  animation: pinPulse 2s ease-in-out infinite;
+}
+@keyframes pinPulse { 0%,100%{box-shadow: 0 0 0 6px rgba(201,168,76,0.2),0 0 0 12px rgba(201,168,76,0.08)} 50%{box-shadow: 0 0 0 10px rgba(201,168,76,0.15),0 0 0 20px rgba(201,168,76,0.05)} }
+.pin-label {
+  margin-top: 0.8rem;
+  background: rgba(10,10,10,0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.map-streets {
+  position: absolute;
+  inset: 0;
+}
+.map-streets::before {
+  content: '';
+  position: absolute;
+  top: 35%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(201,168,76,0.12);
+}
+.map-streets::after {
+  content: '';
+  position: absolute;
+  left: 40%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(201,168,76,0.12);
+}
+.map-block {
+  position: absolute;
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.07);
+  border-radius: 4px;
+}
+.mb-1 { top: 10%; left: 10%; width: 120px; height: 80px; }
+.mb-2 { top: 10%; left: 60%; width: 80px; height: 100px; }
+.mb-3 { top: 55%; left: 15%; width: 100px; height: 120px; }
+.mb-4 { top: 60%; left: 55%; width: 130px; height: 90px; }
+
+/* ============================================
+   BOOKING FORM SECTION
+   ============================================ */
+#booking { background: var(--black-deep); border-top: 1px solid var(--black-border); }
+.booking-form-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(20,14,6,0.6);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 20px;
+  padding: clamp(2rem, 5vw, 4rem);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-card), var(--shadow-gold);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group.full { grid-column: span 2; }
+.form-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.form-input {
+  padding: 0.9rem 1.2rem;
+  background: rgba(10,10,10,0.6);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: var(--transition);
+  outline: none;
+  width: 100%;
+}
+.form-input:focus { border-color: rgba(201,168,76,0.5); background: rgba(10,10,10,0.8); box-shadow: 0 0 0 3px rgba(201,168,76,0.08); }
+.form-input::placeholder { color: var(--text-muted); }
+.form-submit { margin-top: 1rem; width: 100%; justify-content: center; padding: 1.1rem; font-size: 0.82rem; }
+.form-guarantee {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.form-guarantee span { color: var(--gold); }
+
+/* ============================================
+   FINAL CTA SECTION
+   ============================================ */
+#final-cta {
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(107,30,46,0.08) 0%, transparent 60%),
+    var(--black-deep);
+  border-top: 1px solid var(--black-border);
+  text-align: center;
+}
+.cta-decor {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 15vw, 14rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: rgba(201,168,76,0.04);
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-inner .section-title { margin-bottom: 1.5rem; }
+.cta-inner .elegant-title { margin-bottom: 2.5rem; }
+.cta-actions { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.cta-guarantees {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+.cta-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.cta-guarantee-icon { font-size: 1rem; color: var(--gold); }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: var(--black-deep);
+  border-top: 1px solid var(--black-border);
+  padding: 4rem 0 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+.footer-brand .logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+.footer-brand .tagline {
+  font-family: var(--font-elegant);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.social-links { display: flex; gap: 0.75rem; }
+.social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  font-weight: 700;
+}
+.social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+.footer-col-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.footer-links { display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--text-primary); }
+.footer-bottom {
+  border-top: 1px solid var(--black-border);
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+.footer-awards { display: flex; gap: 1rem; align-items: center; }
+.footer-award {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+}
+.footer-award span { color: var(--gold); }
+
+/* ============================================
+   SECTION MID CTA STRIP
+   ============================================ */
+.cta-strip {
+  background: var(--gradient-gold);
+  padding: 2.5rem 0;
+  text-align: center;
+}
+.cta-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.cta-strip-text .eyebrow { color: rgba(10,10,10,0.7); margin-bottom: 0.3rem; }
+.cta-strip-text .headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 900;
+  color: var(--black-deep);
+  line-height: 1.2;
+}
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 2.2rem;
+  background: var(--black-deep);
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.btn-dark:hover { background: #111; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+  .advantages-inner { grid-template-columns: repeat(2, 1fr); }
+  .advantage-item:nth-child(2) { border-right: none; }
+  .advantage-item:nth-child(1), .advantage-item:nth-child(2) { border-bottom: 1px solid var(--black-border); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+}
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-right { display: none; }
+  .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .story-visual { height: 350px; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .contacts-grid { grid-template-columns: 1fr; }
+  .contact-map { height: 350px; }
+  .gallery-grid { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, 180px); }
+  .gi-1 { grid-column: span 6; grid-row: span 2; }
+  .gi-2,.gi-3,.gi-4,.gi-5 { grid-column: span 3; grid-row: span 1; }
+  .gi-6,.gi-7,.gi-8 { display: none; }
+  .dishes-grid { grid-template-columns: repeat(2, 1fr); }
+  .offers-grid { grid-template-columns: 1fr; }
+  .events-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-book { display: none; }
+  .advantages-inner { grid-template-columns: 1fr; }
+  .advantage-item { border-right: none; border-bottom: 1px solid var(--black-border); }
+  .advantage-item:last-child { border-bottom: none; }
+  .dishes-grid { grid-template-columns: 1fr; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-item { border-right: none; }
+  .team-grid { grid-template-columns: 1fr; }
+  .reviews-rating-bar { flex-direction: column; gap: 2rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .hero-content { padding-top: 8rem; }
+  .review-card { min-width: calc(100% - 0rem); }
+  .form-row { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: span 1; }
+  .cta-strip-inner { flex-direction: column; gap: 1.5rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; gap: 0.5rem; }
+  .gallery-grid .gallery-item { grid-column: span 1 !important; grid-row: span 1 !important; height: 160px; }
+  .gi-1 { grid-column: span 2 !important; }
+  .gi-6, .gi-7, .gi-8 { display: block; }
+  .cta-guarantees { gap: 1.5rem; }
+  .fixed-book { bottom: 1rem; right: 1rem; }
+}
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .cta-actions { flex-direction: column; align-items: center; }
+  .reviews-rating-bar { padding: 1.5rem; }
+  .booking-form-wrap { padding: 1.5rem; }
+}
+
+/* ============================================
+   PREFERS REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1; transform: none; }
+}
+
+/* ============================================
+   ФОТОГРАФИИ — вставлены поверх оригинальных стилей
+   ============================================ */
+
+/* Hero */
+#hero { background-image: url('img/31.jpg'); background-size: cover; background-position: center; }
+
+/* Story */
+.story-img-main { background-image: url('img/7.jpg'); background-size: cover; background-position: center; }
+.story-img-accent { background-image: url('img/19.jpg'); background-size: cover; background-position: center; }
+
+/* Блюда */
+.dv-1 { background-image: url('img/15.jpg'); background-size: cover; background-position: center; }
+.dv-2 { background-image: url('img/2.jpg'); background-size: cover; background-position: center; }
+.dv-3 { background-image: url('img/4.jpg'); background-size: cover; background-position: center; }
+.dv-4 { background-image: url('img/5.jpg'); background-size: cover; background-position: center; }
+.dv-5 { background-image: url('img/3.jpg'); background-size: cover; background-position: center; }
+.dv-6 { background-image: url('img/6.jpg'); background-size: cover; background-position: center; }
+
+/* Меню — круглые иконки */
+.mid-1 { background-image: url('img/10.jpg'); background-size: cover; background-position: center; }
+.mid-2 { background-image: url('img/20.jpg'); background-size: cover; background-position: center; }
+.mid-3 { background-image: url('img/11.jpg'); background-size: cover; background-position: center; }
+.mid-4 { background-image: url('img/12.jpg'); background-size: cover; background-position: center; }
+.mid-5 { background-image: url('img/13.jpg'); background-size: cover; background-position: center; }
+.mid-6 { background-image: url('img/14.jpg'); background-size: cover; background-position: center; }
+.mid-7 { background-image: url('img/1.jpg'); background-size: cover; background-position: center; }
+.mid-8 { background-image: url('img/16.jpg'); background-size: cover; background-position: center; }
+.mid-9 { background-image: url('img/18.jpg'); background-size: cover; background-position: center; }
+.mid-10 { background-image: url('img/8.jpg'); background-size: cover; background-position: center; }
+.mid-11 { background-image: url('img/9.jpg'); background-size: cover; background-position: center; }
+.mid-12 { background-image: url('img/17.jpg'); background-size: cover; background-position: center; }
+
+/* Галерея */
+.gi-1 { background-image: url('img/22.jpg'); background-size: cover; background-position: center; }
+.gi-2 { background-image: url('img/23.jpg'); background-size: cover; background-position: center; }
+.gi-3 { background-image: url('img/24.jpg'); background-size: cover; background-position: center; }
+.gi-4 { background-image: url('img/25.jpg'); background-size: cover; background-position: center; }
+.gi-5 { background-image: url('img/26.jpg'); background-size: cover; background-position: center; }
+.gi-6 { background-image: url('img/27.jpg'); background-size: cover; background-position: center; }
+.gi-7 { background-image: url('img/28.jpg'); background-size: cover; background-position: center; }
+.gi-8 { background-image: url('img/29.jpg'); background-size: cover; background-position: center; }
+
+/* Команда */
+.tp-1 { background-image: url('img/30.png'); background-size: cover; background-position: center top; }
+.tp-2 { background-image: url('img/31.png'); background-size: cover; background-position: center top; }
+.tp-3 { background-image: url('img/32.png'); background-size: cover; background-position: center top; }
+.tp-4 { background-image: url('img/33.png'); background-size: cover; background-position: center top; }
+
+/* События/Банкеты */
+.events-visual { background-image: url('img/34.jpg'); background-size: cover; background-position: center; }
+
+/* Спецпредложения */
+.oc-1 { background-image: url('img/31.jpg'); background-size: cover; background-position: center; }
+.oc-2 { background-image: url('img/32.jpg'); background-size: cover; background-position: center; }
+.oc-3 { background-image: url('img/33.jpg'); background-size: cover; background-position: center; }
+
+/* Hero визуал (правый блок с тарелкой) */
+.hero-food-visual { background-image: url('img/1.jpg'); background-size: cover; background-position: center; }
+
+
+/* Слайдер — гарантия обрезки */
+.reviews-slider { overflow: hidden; }
+.reviews-track { display: flex; gap: 24px; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     LOADER
+     ============================================ -->
+<div id="loader" role="status" aria-label="Загрузка сайта">
+  <div class="loader-logo">NOIR</div>
+  <div class="loader-line"></div>
+  <div class="loader-sub">Ресторан авторской кухни</div>
+</div>
+
+<!-- ============================================
+     MOBILE MENU
+     ============================================ -->
+<nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#hero" onclick="closeMobile()">Главная</a>
+  <a href="#dishes" onclick="closeMobile()">Меню</a>
+  <a href="#story" onclick="closeMobile()">О нас</a>
+  <a href="#reviews" onclick="closeMobile()">Отзывы</a>
+  <a href="#events" onclick="closeMobile()">Банкеты</a>
+  <a href="#contacts" onclick="closeMobile()">Контакты</a>
+  <a href="#booking" onclick="closeMobile()" style="color:var(--gold)">Забронировать</a>
+</nav>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<header>
+  <nav class="nav" id="mainNav" aria-label="Основная навигация">
+    <a href="#hero" class="nav-logo" aria-label="NOIR — Главная">NOIR</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#dishes">Меню</a></li>
+      <li><a href="#story">О нас</a></li>
+      <li><a href="#gallery">Галерея</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#events">Банкеты</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <a href="#booking" class="btn-primary nav-book" aria-label="Забронировать столик">
+      Забронировать
+      <span class="btn-arrow" aria-hidden="true"></span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ============================================
+     FIXED BOOKING BUTTON
+     ============================================ -->
+<div class="fixed-book" id="fixedBook">
+  <a href="#booking" class="btn-primary" aria-label="Забронировать столик">
+    Забронировать столик
+    <span class="btn-arrow" aria-hidden="true"></span>
+  </a>
+</div>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<main>
+<section id="hero" aria-label="Главный экран">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-ambient" aria-hidden="true"></div>
+  <div class="hero-ambient-2" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge reveal delay-1">
+        <span class="star" aria-hidden="true">★</span>
+        <span>Michelin Star 2024 · Лучший ресторан Москвы</span>
+      </div>
+      <h1 class="hero-title reveal delay-2">
+        Где каждый<br>ужин — <span class="line-italic">история</span><br>на всю жизнь
+      </h1>
+      <p class="hero-subtitle reveal delay-3">
+        Авторская кухня Chef Александра Волкова. Двенадцать лет безупречного вкуса в самом сердце Москвы.
+      </p>
+      <div class="hero-actions reveal delay-4">
+        <a href="#booking" class="btn-primary">
+          Забронировать стол
+          <span class="btn-arrow" aria-hidden="true"></span>
+        </a>
+        <a href="#dishes" class="btn-secondary">Смотреть меню</a>
+      </div>
+      <div class="hero-stats reveal delay-5">
+        <span class="stars" aria-label="Рейтинг 5 звёзд">★★★★★</span>
+        <span>4.9 · 847 отзывов на Google</span>
+      </div>
+    </div>
+    <div class="hero-right reveal-scale delay-2" aria-hidden="true">
+      <div class="hero-visual">
+        <div class="hero-plate-main">
+          <div class="hero-food-visual">
+            <div class="hero-food-items">
+             
+            </div>
+          </div>
+          
+        </div>
+        <div class="hero-overlay-card">
+          <div>
+            <div class="overlay-dish-name">Утка конфи с трюфелем</div>
+            <div class="overlay-dish-sub">Блюдо дня · Авторская подача</div>
+          </div>
+          <div class="overlay-price">2 800 ₽</div>
+        </div>
+        <div class="hero-float-tag">
+          <span class="float-tag-num" data-counter="12">0</span>
+          <span class="float-tag-label">лет<br>мастерства</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<!-- ============================================
+     ADVANTAGES
+     ============================================ -->
+<section id="advantages" aria-label="Преимущества ресторана">
+  <div class="advantages-inner">
+    <article class="advantage-item reveal delay-1">
+      <div class="adv-num" data-counter="847">0</div>
+      <div class="adv-label">Довольных гостей</div>
+      <p class="adv-desc">Каждый отзыв — история незабываемого вечера в стенах NOIR</p>
+    </article>
+    <article class="advantage-item reveal delay-2">
+      <div class="adv-num" data-counter="12">0</div>
+      <div class="adv-label">Лет безупречного вкуса</div>
+      <p class="adv-desc">Двенадцать лет авторской кухни — каждый год открытие нового</p>
+    </article>
+    <article class="advantage-item reveal delay-3">
+      <div class="adv-num" data-counter="98">0</div>
+      <div class="adv-label">% гостей вернулись снова</div>
+      <p class="adv-desc">Однажды попробовав NOIR, вы возвращаетесь снова и снова</p>
+    </article>
+    <article class="advantage-item reveal delay-4">
+      <div class="adv-num" data-counter="3">0</div>
+      <div class="adv-label">Michelin звезды</div>
+      <p class="adv-desc">Высшее признание гастрономического сообщества мира</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================
+     STORY
+     ============================================ -->
+<section id="story" class="section-pad" aria-label="История ресторана">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual reveal-left">
+        <div class="story-img-main" aria-hidden="true">
+          
+        </div>
+        <div class="story-img-accent" aria-hidden="true">
+          
+        </div>
+        <div class="story-award reveal delay-3" aria-label="Michelin Star">
+          <div class="award-icon">⭐</div>
+          <div class="award-text">Michelin<br>Star 2024</div>
+        </div>
+      </div>
+      <div class="story-text">
+        <p class="eyebrow reveal delay-1">Наша история</p>
+        <h2 class="section-title reveal delay-2">Страсть к совершенству, рождённая<br><span class="gold-text">в 2012 году</span></h2>
+        <div class="gold-line reveal delay-2"></div>
+        <blockquote class="elegant-title reveal delay-3">
+          "Кухня — это язык, на котором я говорю с душой каждого гостя"<br>— Александр Волков, шеф-повар
+        </blockquote>
+        <p class="body-text reveal delay-3">
+          NOIR родился из одержимости: мы хотели создать место, где гастрономия и эстетика становятся единым языком. Стажировки в Париже, Токио и Копенгагене сформировали уникальный стиль — точность французской школы, деликатность японского ваби-саби и скандинавский минимализм.
+        </p>
+        <p class="body-text reveal delay-4">
+          Сегодня NOIR — это 3 звезды Michelin, победитель The World's 50 Best Restaurants и место, куда возвращаются снова и снова.
+        </p>
+        <div class="story-milestones reveal delay-4">
+          <div class="milestone">
+            <span class="milestone-year">2012</span>
+            <span class="milestone-text">Открытие первого зала на 40 мест</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-year">2016</span>
+            <span class="milestone-text">Первая звезда Michelin</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-year">2020</span>
+            <span class="milestone-text">Вхождение в топ-50 ресторанов мира</span>
+          </div>
+          <div class="milestone">
+            <span class="milestone-year">2024</span>
+            <span class="milestone-text">Третья звезда Michelin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     DISHES
+     ============================================ -->
+<section id="dishes" class="section-pad" aria-label="Популярные блюда">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Авторская кухня</p>
+      <h2 class="section-title reveal delay-1">Блюда, о которых<br><span class="gold-text">говорит весь город</span></h2>
+      <div class="gold-line center"></div>
+      <p class="body-text reveal delay-2" style="max-width:560px;margin:0 auto">Каждое блюдо — это история из трёх глав: идея, мастерство и эмоция. Chef Волков создаёт не еду — он создаёт воспоминания.</p>
+    </div>
+    <div class="dishes-grid">
+      <article class="dish-card reveal delay-1">
+        <div class="dish-visual dv-1">
+          <div class="dish-decorations">
+            
+          </div>
+          <div class="dish-badge">Chef's Choice</div>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-name">Утка конфи с трюфелем</h3>
+          <p class="dish-desc">Ножка утки, томлённая 18 часов в утином жире, с соусом из чёрного трюфеля и пюре из сельдерея</p>
+          <div class="dish-footer">
+            <span class="dish-price">2 800 ₽</span>
+            <div class="dish-tags">
+              <span class="dish-tag">Горячее</span>
+              <span class="dish-tag">★4.9</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="dish-card reveal delay-2">
+        <div class="dish-visual dv-2">
+          <div class="dish-decorations">
+            
+          </div>
+          <div class="dish-badge">Signature</div>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-name">Тартар из говядины</h3>
+          <p class="dish-desc">Ручная рубка мраморной говядины A5, яйцо пашот, каперсы, горчичный крем и хрустящие гренки</p>
+          <div class="dish-footer">
+            <span class="dish-price">1 900 ₽</span>
+            <div class="dish-tags">
+              <span class="dish-tag">Закуска</span>
+              <span class="dish-tag">★4.8</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="dish-card reveal delay-3">
+        <div class="dish-visual dv-3">
+          <div class="dish-decorations">
+            
+          </div>
+          <div class="dish-badge">New</div>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-name">Зелёный risotto</h3>
+          <p class="dish-desc">Карнарoli с эмульсией из свежего горошка, пармезан 36 месяцев, трюфельное масло и хрустящий лук-шалот</p>
+          <div class="dish-footer">
+            <span class="dish-price">1 600 ₽</span>
+            <div class="dish-tags">
+              <span class="dish-tag">Паста</span>
+              <span class="dish-tag">★4.7</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="dish-card reveal delay-4">
+        <div class="dish-visual dv-4">
+          <div class="dish-decorations">
+            
+          </div>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-name">Телятина sous-vide</h3>
+          <p class="dish-desc">Вырезка телёнка, приготовленная 4 часа при 58°C, с соусом жю и ферментированным чесноком</p>
+          <div class="dish-footer">
+            <span class="dish-price">3 200 ₽</span>
+            <div class="dish-tags">
+              <span class="dish-tag">Горячее</span>
+              <span class="dish-tag">★5.0</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="dish-card reveal delay-5">
+        <div class="dish-visual dv-5">
+          <div class="dish-decorations">
+            
+          </div>
+          <div class="dish-badge">Seasonal</div>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-name">Крем-суп из трюфеля</h3>
+          <p class="dish-desc">Бархатистый биск из белого трюфеля с пеной из пармезана, трюфельным маслом и листьями червиля</p>
+          <div class="dish-footer">
+            <span class="dish-price">1 400 ₽</span>
+            <div class="dish-tags">
+              <span class="dish-tag">Суп</span>
+              <span class="dish-tag">★4.9</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="dish-card reveal delay-6">
+        <div class="dish-visual dv-6">
+          <div class="dish-decorations">
+            
+          </div>
+          <div class="dish-badge">Dessert</div>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-name">Soufflé au Chocolat</h3>
+          <p class="dish-desc">Горячее суфле Valrhona 70%, ванильное мороженое Bourbon, золотые листья и хрустящий пралине</p>
+          <div class="dish-footer">
+            <span class="dish-price">950 ₽</span>
+            <div class="dish-tags">
+              <span class="dish-tag">Десерт</span>
+              <span class="dish-tag">★5.0</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="dishes-cta reveal" style="margin-top:3rem">
+      <a href="#menu" class="btn-secondary">Полное меню <span class="btn-arrow"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CTA STRIP
+     ============================================ -->
+<div class="cta-strip reveal" aria-label="Призыв к действию">
+  <div class="container">
+    <div class="cta-strip-inner">
+      <div class="cta-strip-text">
+        <p class="eyebrow">Ограниченное количество мест</p>
+        <p class="headline">Столики на выходные уже заканчиваются</p>
+      </div>
+      <a href="#booking" class="btn-dark">
+        Забронировать сейчас
+        <span class="btn-arrow" style="border-color:var(--gold)"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     FULL MENU
+     ============================================ -->
+<section id="menu" class="section-pad" aria-label="Полное меню ресторана">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Меню</p>
+      <h2 class="section-title reveal delay-1">Сезонное меню<br><span class="gold-text">от Chef Волкова</span></h2>
+      <div class="gold-line center"></div>
+    </div>
+    <nav class="menu-categories reveal delay-2" aria-label="Категории меню">
+      <button class="menu-cat-btn active" data-cat="all">Всё меню</button>
+      <button class="menu-cat-btn" data-cat="cold">Холодные закуски</button>
+      <button class="menu-cat-btn" data-cat="hot">Горячие закуски</button>
+      <button class="menu-cat-btn" data-cat="soup">Супы</button>
+      <button class="menu-cat-btn" data-cat="main">Основные блюда</button>
+      <button class="menu-cat-btn" data-cat="dessert">Десерты</button>
+      <button class="menu-cat-btn" data-cat="drinks">Напитки</button>
+    </nav>
+    <div class="menu-grid reveal delay-3" id="menuGrid">
+      <div class="menu-item" data-cat="cold">
+        <div class="menu-item-dot mid-1"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Карпаччо из тунца</h3>
+          <p class="menu-item-desc">Yellowfin tuna, авокадо, каперсы, понзу, юзу</p>
+        </div>
+        <div class="menu-item-price">1 600 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="cold">
+        <div class="menu-item-dot mid-2"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Тартар из говядины</h3>
+          <p class="menu-item-desc">Мраморная A5, каперсы, корнишоны, горчичный айоли</p>
+        </div>
+        <div class="menu-item-price">1 900 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="hot">
+        <div class="menu-item-dot mid-3"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Гребешки с трюфелем</h3>
+          <p class="menu-item-desc">Saint-Jacques, трюфельный биск, спаржа, пена пармезан</p>
+        </div>
+        <div class="menu-item-price">2 400 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="hot">
+        <div class="menu-item-dot mid-4"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Гусиный паштет</h3>
+          <p class="menu-item-desc">Terrine de foie gras, бриошь, конфитюр из инжира, соль Флёр де сель</p>
+        </div>
+        <div class="menu-item-price">2 100 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="soup">
+        <div class="menu-item-dot mid-5"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Биск из лангустин</h3>
+          <p class="menu-item-desc">Лангустины, шафран, кокосовые сливки, лемонграсс</p>
+        </div>
+        <div class="menu-item-price">1 800 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="soup">
+        <div class="menu-item-dot mid-6"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Крем-суп трюфель</h3>
+          <p class="menu-item-desc">Белый трюфель, пена пармезан, хрустящий лук-шалот</p>
+        </div>
+        <div class="menu-item-price">1 400 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="main">
+        <div class="menu-item-dot mid-7"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Утка конфи с трюфелем</h3>
+          <p class="menu-item-desc">18 часов томления, соус жю, пюре из сельдерея, трюфель</p>
+        </div>
+        <div class="menu-item-price">2 800 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="main">
+        <div class="menu-item-dot mid-8"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Телятина sous-vide</h3>
+          <p class="menu-item-desc">4 часа при 58°C, соус жю, ферментированный чеснок</p>
+        </div>
+        <div class="menu-item-price">3 200 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="dessert">
+        <div class="menu-item-dot mid-12"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Soufflé au Chocolat</h3>
+          <p class="menu-item-desc">Valrhona 70%, ванильное мороженое, золото, пралине</p>
+        </div>
+        <div class="menu-item-price">950 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="dessert">
+        <div class="menu-item-dot mid-9"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Tarte Tatin с карамелью</h3>
+          <p class="menu-item-desc">Яблоки Гренни Смит, карамель бёр-салé, взбитые сливки</p>
+        </div>
+        <div class="menu-item-price">780 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="drinks">
+        <div class="menu-item-dot mid-10"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Авторский коктейль NOIR</h3>
+          <p class="menu-item-desc">Ром XO, активированный уголь, цитрус, розмарин, гранат</p>
+        </div>
+        <div class="menu-item-price">680 ₽</div>
+      </div>
+      <div class="menu-item" data-cat="drinks">
+        <div class="menu-item-dot mid-11"></div>
+        <div class="menu-item-body">
+          <h3 class="menu-item-name">Вино Château Margaux</h3>
+          <p class="menu-item-desc">Grand Cru Classé, 2018, бокал / бутылка</p>
+        </div>
+        <div class="menu-item-price">2 400 / 18 000 ₽</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     GALLERY
+     ============================================ -->
+<section id="gallery" class="section-pad" aria-label="Галерея ресторана">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Пространство</p>
+      <h2 class="section-title reveal delay-1">Атмосфера, созданная<br><span class="gold-text">для вашего вечера</span></h2>
+      <div class="gold-line center"></div>
+    </div>
+    <div class="gallery-grid reveal delay-2">
+      <div class="gallery-item gi-1" tabindex="0" aria-label="Главный зал ресторана NOIR">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+      <div class="gallery-item gi-2" tabindex="0" aria-label="Интерьер ресторана">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+      <div class="gallery-item gi-3" tabindex="0" aria-label="Закрытый кабинет">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+      <div class="gallery-item gi-4" tabindex="0" aria-label="Барная стойка">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+      <div class="gallery-item gi-5" tabindex="0" aria-label="Веранда">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+      <div class="gallery-item gi-6" tabindex="0" aria-label="Открытая кухня">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+      <div class="gallery-item gi-7" tabindex="0" aria-label="Винный погреб">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+      <div class="gallery-item gi-8" tabindex="0" aria-label="Детали интерьера">
+        <div class="gallery-item-inner"></div>
+        <div class="gallery-overlay"><span class="gallery-label"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TEAM
+     ============================================ -->
+<section id="team" class="section-pad" aria-label="Команда поваров">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Команда</p>
+      <h2 class="section-title reveal delay-1">Мастера, которые<br><span class="gold-text">создают магию</span></h2>
+      <div class="gold-line center"></div>
+      <p class="body-text reveal delay-2" style="max-width:500px;margin:0 auto">Наша команда — это 40 лет суммарного опыта в лучших ресторанах Европы и Азии</p>
+    </div>
+    <div class="team-grid">
+      <article class="team-card reveal delay-1">
+        <div class="team-photo tp-1" aria-hidden="true">
+          
+          
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Александр Волков</h3>
+          <p class="team-role">Executive Chef</p>
+          <p class="team-desc">Ученик Alain Ducasse, стажировки в Noma и Mugaritz. Основатель концепции "Emotional Cuisine"</p>
+          <div class="team-awards">
+            <span class="team-award-tag">3× Michelin</span>
+            <span class="team-award-tag">Best Chef 2023</span>
+          </div>
+        </div>
+      </article>
+      <article class="team-card reveal delay-2">
+        <div class="team-photo tp-2" aria-hidden="true">
+          
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Мария Соколова</h3>
+          <p class="team-role">Pastry Chef</p>
+          <p class="team-desc">Победитель European Pastry Cup 2021. Специализируется на шоколадной скульптуре и молекулярных десертах</p>
+          <div class="team-awards">
+            <span class="team-award-tag">EPC Winner</span>
+            <span class="team-award-tag">Best Dessert</span>
+          </div>
+        </div>
+      </article>
+      <article class="team-card reveal delay-3">
+        <div class="team-photo tp-3" aria-hidden="true">
+          
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Дмитрий Ким</h3>
+          <p class="team-role">Sous-Chef</p>
+          <p class="team-desc">Мастер азиатских техник. Привнёс умами-концепцию в европейскую классику. Le Cordon Bleu, Paris</p>
+          <div class="team-awards">
+            <span class="team-award-tag">Le Cordon Bleu</span>
+            <span class="team-award-tag">Umami Master</span>
+          </div>
+        </div>
+      </article>
+      <article class="team-card reveal delay-4">
+        <div class="team-photo tp-4" aria-hidden="true">
+          
+        </div>
+        <div class="team-info">
+          <h3 class="team-name">Екатерина Лебедева</h3>
+          <p class="team-role">Sommelier</p>
+          <p class="team-desc">WSET Diploma, коллекция из 1200+ позиций. Создала авторскую программу парных вин к каждому блюду</p>
+          <div class="team-awards">
+            <span class="team-award-tag">WSET Diploma</span>
+            <span class="team-award-tag">Best Wine 2024</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     REVIEWS
+     ============================================ -->
+<section id="reviews" class="section-pad" aria-label="Отзывы гостей">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Гости о нас</p>
+      <h2 class="section-title reveal delay-1">847 историй<br><span class="gold-text">незабываемых вечеров</span></h2>
+      <div class="gold-line center"></div>
+    </div>
+    <div class="reviews-rating-bar reveal delay-2">
+      <div class="rating-big">
+        <div class="num" data-counter-float="4.9">0</div>
+        <div class="stars" aria-label="Рейтинг 5 звёзд">★★★★★</div>
+        <div class="count">847 отзывов</div>
+      </div>
+      <div class="rating-platforms">
+        <div class="rating-platform">
+          <span class="rp-name">Google</span>
+          <div class="rp-bar"><div class="rp-fill" style="width:0" data-width="98%"></div></div>
+          <span class="rp-score">4.9</span>
+        </div>
+        <div class="rating-platform">
+          <span class="rp-name">TripAdvisor</span>
+          <div class="rp-bar"><div class="rp-fill" style="width:0" data-width="96%"></div></div>
+          <span class="rp-score">4.8</span>
+        </div>
+        <div class="rating-platform">
+          <span class="rp-name">Яндекс</span>
+          <div class="rp-bar"><div class="rp-fill" style="width:0" data-width="94%"></div></div>
+          <span class="rp-score">4.7</span>
+        </div>
+        <div class="rating-platform">
+          <span class="rp-name">2ГИС</span>
+          <div class="rp-bar"><div class="rp-fill" style="width:0" data-width="96%"></div></div>
+          <span class="rp-score">4.8</span>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-slider reveal delay-3" aria-label="Слайдер с отзывами">
+      <div class="reviews-track" id="reviewsTrack" role="list">
+        <article class="review-card" role="listitem">
+          <div class="review-header">
+            <div class="reviewer-avatar av-1" aria-hidden="true">А</div>
+            <div class="reviewer-info">
+              <div class="name">Анастасия В.</div>
+              <div class="platform">Google · Март 2024</div>
+            </div>
+          </div>
+          <div class="review-stars" aria-label="Оценка 5 звёзд">★★★★★</div>
+          <p class="review-text">Отмечали годовщину свадьбы. Это был один из лучших вечеров в нашей жизни. Chef Волков лично вышел к столику. Утка конфи — это просто откровение. Сервис безупречный, как в лучших ресторанах Парижа.</p>
+          <div class="review-dish">🍽 Утка конфи с трюфелем</div>
+        </article>
+        <article class="review-card" role="listitem">
+          <div class="review-header">
+            <div class="reviewer-avatar av-2" aria-hidden="true">М</div>
+            <div class="reviewer-info">
+              <div class="name">Михаил Ч.</div>
+              <div class="platform">TripAdvisor · Февраль 2024</div>
+            </div>
+          </div>
+          <div class="review-stars" aria-label="Оценка 5 звёзд">★★★★★</div>
+          <p class="review-text">Провёл переговоры с партнёрами из Германии. Гости были в восторге. Закрытый кабинет, идеальный сервис, сомелье — просто бог. Каждое блюдо — произведение искусства.</p>
+          <div class="review-dish">🍽 Гребешки с трюфелем</div>
+        </article>
+        <article class="review-card" role="listitem">
+          <div class="review-header">
+            <div class="reviewer-avatar av-3" aria-hidden="true">Е</div>
+            <div class="reviewer-info">
+              <div class="name">Елена К.</div>
+              <div class="platform">Google · Январь 2024</div>
+            </div>
+          </div>
+          <div class="review-stars" aria-label="Оценка 5 звёзд">★★★★★</div>
+          <p class="review-text">Отмечали день рождения мамы. Она была растрогана до слёз — настолько всё красиво и вкусно. Десерт Soufflé подали с персональным посланием. Мы вернёмся обязательно!</p>
+          <div class="review-dish">🍽 Soufflé au Chocolat</div>
+        </article>
+        <article class="review-card" role="listitem">
+          <div class="review-header">
+            <div class="reviewer-avatar av-4" aria-hidden="true">Д</div>
+            <div class="reviewer-info">
+              <div class="name">Дмитрий Л.</div>
+              <div class="platform">2ГИС · Декабрь 2023</div>
+            </div>
+          </div>
+          <div class="review-stars" aria-label="Оценка 5 звёзд">★★★★★</div>
+          <p class="review-text">Попробовал дегустационное меню из 7 блюд. Это не просто ужин — это путешествие через вкусы. Каждый курс рассказывает историю. NOIR — это лучшее, что есть в Москве.</p>
+          <div class="review-dish">🍽 Дегустационное меню 7 блюд</div>
+        </article>
+        <article class="review-card" role="listitem">
+          <div class="review-header">
+            <div class="reviewer-avatar av-5" aria-hidden="true">О</div>
+            <div class="reviewer-info">
+              <div class="name">Ольга М.</div>
+              <div class="platform">Яндекс · Ноябрь 2023</div>
+            </div>
+          </div>
+          <div class="review-stars" aria-label="Оценка 5 звёзд">★★★★★</div>
+          <p class="review-text">Организовали корпоратив на 20 человек. Команда NOIR справилась идеально. Индивидуальное меню, живая музыка, безупречная сервировка. Коллеги до сих пор вспоминают с восхищением.</p>
+          <div class="review-dish">🍽 Корпоративный банкет</div>
+        </article>
+      </div>
+    </div>
+    <div class="reviews-nav reveal delay-4">
+      <button class="reviews-btn" id="reviewsPrev" aria-label="Предыдущий отзыв">‹</button>
+      <div class="reviews-dots" role="tablist" aria-label="Навигация отзывов">
+        <div class="reviews-dot active" role="tab" aria-selected="true" data-index="0"></div>
+        <div class="reviews-dot" role="tab" aria-selected="false" data-index="1"></div>
+        <div class="reviews-dot" role="tab" aria-selected="false" data-index="2"></div>
+      </div>
+      <button class="reviews-btn" id="reviewsNext" aria-label="Следующий отзыв">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     OFFERS
+     ============================================ -->
+<section id="offers" class="section-pad" aria-label="Акции и специальные предложения">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Специально для вас</p>
+      <h2 class="section-title reveal delay-1">Предложения,<br><span class="gold-text">которые исчезают</span></h2>
+      <div class="gold-line center"></div>
+    </div>
+    <div class="offers-grid">
+      <article class="offer-card oc-1 reveal delay-1">
+        <div class="offer-badge ob-gold">Хит сезона</div>
+        <h3 class="offer-title">Дегустационное меню<br>на двоих</h3>
+        <p class="offer-desc">7 авторских блюд от Chef Волкова + парные вина от сомелье. Включает аперитив, хлебную корзину и мигнардиз.</p>
+        <div class="offer-countdown">
+          <div class="cd-unit"><span class="cd-num" id="cd-h">12</span><span class="cd-label">часов</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><span class="cd-num" id="cd-m">34</span><span class="cd-label">минут</span></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><span class="cd-num" id="cd-s">18</span><span class="cd-label">секунд</span></div>
+        </div>
+        <div class="offer-price-wrap">
+          <span class="offer-price-old">16 000 ₽</span>
+          <span class="offer-price-new">12 800 ₽</span>
+          <span class="offer-price-save">экономия 20%</span>
+        </div>
+        <a href="#booking" class="btn-primary">Забронировать <span class="btn-arrow"></span></a>
+      </article>
+      <article class="offer-card oc-2 reveal delay-2">
+        <div class="offer-badge ob-red">Романтика</div>
+        <h3 class="offer-title">Вечер для двоих<br>"Première Nuit"</h3>
+        <p class="offer-desc">Приватный столик у окна, декор из живых роз, бутылка шампанского Cristal и персональный фотограф на 30 минут.</p>
+        <p class="offer-desc" style="margin-top:0.5rem;color:var(--gold);font-size:0.78rem;">⚡ Осталось 3 столика на эти выходные</p>
+        <div class="offer-price-wrap">
+          <span class="offer-price-new" style="color:#d4607a">8 500 ₽</span>
+        </div>
+        <p class="offer-desc" style="margin:0 0 1.5rem;font-size:0.78rem;">+ стоимость ужина</p>
+        <a href="#booking" class="btn-primary" style="background:linear-gradient(135deg,#8b2a3e,#6b1e2e);box-shadow:0 8px 30px rgba(107,30,46,0.3)">Забронировать <span class="btn-arrow"></span></a>
+      </article>
+      <article class="offer-card oc-3 reveal delay-3">
+        <div class="offer-badge ob-green">Бизнес-ланч</div>
+        <h3 class="offer-title">Business Lunch<br>от 12:00 до 16:00</h3>
+        <p class="offer-desc">3 курса на выбор, кофе и минеральная вода в подарок. Идеально для деловых переговоров в атмосфере NOIR.</p>
+        <p class="offer-desc" style="margin-top:0.5rem;color:#9aab5a;font-size:0.78rem;">✓ Подача за 45 минут гарантировано</p>
+        <div class="offer-price-wrap" style="margin-top:1.5rem">
+          <span class="offer-price-old">3 200 ₽</span>
+          <span class="offer-price-new" style="color:#9aab5a">2 400 ₽</span>
+        </div>
+        <a href="#booking" class="btn-primary" style="background:linear-gradient(135deg,#6a6a3a,#4a4a2a);box-shadow:0 8px 30px rgba(74,74,42,0.3)">Забронировать <span class="btn-arrow"></span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     EVENTS
+     ============================================ -->
+<section id="events" class="section-pad" aria-label="Организация банкетов и мероприятий">
+  <div class="container">
+    <div class="events-grid">
+      <div class="events-visual reveal-left">
+        <div class="events-table-visual" aria-hidden="true">
+          
+        </div>
+        <div class="events-visual-content">
+          <p class="eyebrow" style="margin-bottom:0.5rem">До 120 гостей</p>
+          <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.3rem">Идеальное мероприятие в NOIR</h3>
+          <p style="font-size:0.8rem;color:var(--text-muted)">Свадьбы · Корпоративы · Юбилеи · Частные вечеринки</p>
+        </div>
+      </div>
+      <div class="events-info">
+        <p class="eyebrow reveal delay-1">Мероприятия</p>
+        <h2 class="section-title reveal delay-2">Ваш праздник —<br><span class="gold-text">наше искусство</span></h2>
+        <div class="gold-line reveal delay-2"></div>
+        <p class="body-text reveal delay-3" style="margin-bottom:2rem">Мы организуем события, которые становятся легендой. Каждая деталь — от меню до флористики — продумана до совершенства.</p>
+        <div class="event-feature reveal delay-3">
+          <div class="event-icon" aria-hidden="true">🎊</div>
+          <div class="event-text">
+            <h3 class="event-title">Свадебные банкеты</h3>
+            <p class="event-desc">Индивидуальное меню, свадебный торт от Pastry Chef Соколовой, живая музыка и полное оформление зала</p>
+          </div>
+        </div>
+        <div class="event-feature reveal delay-4">
+          <div class="event-icon" aria-hidden="true">💼</div>
+          <div class="event-text">
+            <h3 class="event-title">Корпоративные события</h3>
+            <p class="event-desc">Приватные переговорные, командные форматы, презентации блюд от шефа и корпоративные вечеринки</p>
+          </div>
+        </div>
+        <div class="event-feature reveal delay-5">
+          <div class="event-icon" aria-hidden="true">🥂</div>
+          <div class="event-text">
+            <h3 class="event-title">Приватные вечеринки</h3>
+            <p class="event-desc">Дни рождения, юбилеи, романтические ужины — любой формат от 2 до 120 человек с полным сервисом</p>
+          </div>
+        </div>
+        <div class="event-feature reveal delay-6">
+          <div class="event-icon" aria-hidden="true">👨‍🍳</div>
+          <div class="event-text">
+            <h3 class="event-title">Chef's Table</h3>
+            <p class="event-desc">Эксклюзивный ужин за открытой кухней — наблюдайте за работой Chef Волкова от первого лица</p>
+          </div>
+        </div>
+        <div class="reveal delay-6" style="margin-top:2rem">
+          <a href="#booking" class="btn-primary">Обсудить мероприятие <span class="btn-arrow"></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FAQ
+     ============================================ -->
+<section id="faq" class="section-pad" aria-label="Часто задаваемые вопросы">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">FAQ</p>
+      <h2 class="section-title reveal delay-1">Ответы на ваши<br><span class="gold-text">вопросы</span></h2>
+      <div class="gold-line center"></div>
+    </div>
+    <div class="faq-list reveal delay-2" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Нужна ли предварительная бронь?
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Мы настоятельно рекомендуем бронировать столик заранее. На выходные столики заканчиваются за 5–7 дней. Для дегустационного меню и Chef's Table бронь обязательна не менее чем за 48 часов. Позвоните нам или воспользуйтесь формой на сайте — это займёт не более 2 минут.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Есть ли у вас вегетарианское меню?
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Да, у нас есть отдельное вегетарианское и веганское меню от Chef Волкова. Также мы можем адаптировать любое блюдо под ваши диетические предпочтения — безглютеновый, халяль, кошерный варианты доступны по предварительному запросу.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Возможен ли дресс-код?
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">У нас нет строгого дресс-кода, однако мы просим гостей придерживаться Smart Casual или Business Casual. Шорты, спортивная одежда и пляжный стиль в вечернее время нежелательны. Это позволяет сохранить атмосферу, которую ценят наши постоянные гости.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Принимаете ли вы гостей с детьми?
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Конечно! Дети — желанные гости NOIR. У нас есть детское меню, высокие стулья и специальное оформление столика для маленьких гостей. Рекомендуем семьи с детьми бронировать столики в обеденное время (12:00–18:00).</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Можно ли принести свой торт на день рождения?
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Да, мы разрешаем приносить торт от сторонних кондитеров при условии предварительного уведомления. Альтернативно, наш Pastry Chef Мария Соколова может создать эксклюзивный торт специально для вашего события — просто сообщите нам о ваших пожеланиях при бронировании.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Есть ли парковка рядом с рестораном?
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">Да, в 50 метрах от ресторана есть охраняемая платная парковка. Также доступны услуги valet-паркинга в вечернее время. Ближайшая станция метро — "Арбатская", 3 минуты пешком.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACTS
+     ============================================ -->
+<section id="contacts" class="section-pad" aria-label="Контакты ресторана">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Найти нас</p>
+      <h2 class="section-title reveal delay-1">Ждём вас в<br><span class="gold-text">сердце Москвы</span></h2>
+      <div class="gold-line center"></div>
+    </div>
+    <div class="contacts-grid">
+      <div class="contact-info">
+        <div class="contact-block reveal delay-1">
+          <p class="contact-block-title">Адрес</p>
+          <address class="contact-block-text">
+            ул. Большая Никитская, 12<br>Москва, 125009
+          </address>
+        </div>
+        <div class="contact-block reveal delay-2">
+          <p class="contact-block-title">Телефон и бронирование</p>
+          <p class="contact-block-text">
+            <a href="tel:+74950000000">+7 (495) 000-00-00</a><br>
+            <a href="mailto:reserve@noir-restaurant.ru">reserve@noir-restaurant.ru</a>
+          </p>
+        </div>
+        <div class="contact-block reveal delay-3">
+          <p class="contact-block-title">Часы работы</p>
+          <div class="hours-grid">
+            <div class="hours-row">
+              <span class="hours-day">Понедельник — Пятница</span>
+              <span class="hours-time">12:00 — 23:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Суббота</span>
+              <span class="hours-time">12:00 — 01:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Воскресенье</span>
+              <span class="hours-time">12:00 — 00:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Кухня закрывается</span>
+              <span class="hours-time">За 1 час до закрытия</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-block reveal delay-4">
+          <p class="contact-block-title">Метро</p>
+          <p class="contact-block-text">Арбатская / Александровский сад<br><small style="font-size:0.8rem;color:var(--text-muted)">3 минуты пешком</small></p>
+        </div>
+      </div>
+      <div class="contact-map reveal-right" role="img" aria-label="Карта расположения ресторана NOIR">
+        <div class="map-grid-overlay"></div>
+        <div class="map-streets"></div>
+        <div class="map-block mb-1"></div>
+        <div class="map-block mb-2"></div>
+        <div class="map-block mb-3"></div>
+        <div class="map-block mb-4"></div>
+        <div class="map-pin">
+          <div class="pin-dot"></div>
+          <div class="pin-label">NOIR Restaurant</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     BOOKING FORM
+     ============================================ -->
+<section id="booking" class="section-pad" aria-label="Форма бронирования столика">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal">Бронирование</p>
+      <h2 class="section-title reveal delay-1">Зарезервируйте<br><span class="gold-text">свой вечер</span></h2>
+      <div class="gold-line center"></div>
+      <p class="body-text reveal delay-2" style="max-width:500px;margin:0 auto">Заполните форму — мы подтвердим бронирование в течение 15 минут и свяжемся с вами</p>
+    </div>
+    <div class="booking-form-wrap reveal delay-2">
+      <form id="bookingForm" novalidate aria-label="Форма бронирования">
+        <div class="form-row" style="margin-bottom:1.2rem">
+          <div class="form-group">
+            <label class="form-label" for="name">Ваше имя *</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Александр Иванов" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Телефон *</label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="date">Дата *</label>
+            <input class="form-input" type="date" id="date" name="date" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="time">Время *</label>
+            <select class="form-input" id="time" name="time" required>
+              <option value="" disabled selected>Выберите время</option>
+              <option>12:00</option><option>13:00</option><option>14:00</option>
+              <option>15:00</option><option>17:00</option><option>18:00</option>
+              <option>19:00</option><option>20:00</option><option>21:00</option><option>22:00</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="guests">Количество гостей *</label>
+            <select class="form-input" id="guests" name="guests" required>
+              <option value="" disabled selected>Выберите</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="occasion">Повод</label>
+            <select class="form-input" id="occasion" name="occasion">
+              <option value="">Обычный ужин</option>
+              <option>День рождения</option>
+              <option>Годовщина</option>
+              <option>Деловая встреча</option>
+              <option>Романтический ужин</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="wishes">Особые пожелания</label>
+            <textarea class="form-input" id="wishes" name="wishes" rows="3" placeholder="Аллергии, предпочтения в подаче, украшение стола..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary form-submit">
+          Забронировать столик
+          <span class="btn-arrow" aria-hidden="true"></span>
+        </button>
+        <p class="form-guarantee">
+          <span>✓</span> Бесплатная отмена за 24 часа &nbsp;·&nbsp; <span>✓</span> Подтверждение за 15 минут &nbsp;·&nbsp; <span>✓</span> Без предоплаты
+        </p>
+      </form>
+      <div id="formSuccess" style="display:none;text-align:center;padding:2rem">
+        <div style="font-size:2.5rem;margin-bottom:1rem">✓</div>
+        <h3 style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold);margin-bottom:0.8rem">Столик забронирован!</h3>
+        <p class="body-text">Мы свяжемся с вами в течение 15 минут для подтверждения бронирования. Ждём вас в NOIR!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FINAL CTA
+     ============================================ -->
+<section id="final-cta" class="section-pad" aria-label="Финальный призыв к действию">
+  <div class="cta-decor" aria-hidden="true">NOIR</div>
+  <div class="container">
+    <div class="cta-inner">
+      <p class="eyebrow reveal">Начните здесь</p>
+      <h2 class="section-title reveal delay-1">Ваш лучший вечер<br><span class="gold-text">ждёт вас</span></h2>
+      <p class="elegant-title reveal delay-2">Забронируйте столик сегодня — и завтра вы будете вспоминать это со улыбкой</p>
+      <div class="cta-actions reveal delay-3">
+        <a href="#booking" class="btn-primary">
+          Забронировать стол
+          <span class="btn-arrow" aria-hidden="true"></span>
+        </a>
+        <a href="tel:+74950000000" class="btn-secondary">
+          Позвонить нам
+        </a>
+      </div>
+      <div class="cta-guarantees reveal delay-4">
+        <div class="cta-guarantee">
+          <span class="cta-guarantee-icon">★</span>
+          <span>Michelin Star 2024</span>
+        </div>
+        <div class="cta-guarantee">
+          <span class="cta-guarantee-icon">✓</span>
+          <span>Бесплатная отмена</span>
+        </div>
+        <div class="cta-guarantee">
+          <span class="cta-guarantee-icon">⚡</span>
+          <span>Подтверждение за 15 мин</span>
+        </div>
+        <div class="cta-guarantee">
+          <span class="cta-guarantee-icon">♥</span>
+          <span>98% возвращаются снова</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">NOIR</div>
+        <p class="tagline">Ресторан авторской кухни в сердце Москвы. Где каждый ужин становится воспоминанием на всю жизнь.</p>
+        <div class="social-links" aria-label="Социальные сети">
+          <a href="#" class="social-link" aria-label="Instagram">IG</a>
+          <a href="#" class="social-link" aria-label="ВКонтакте">ВК</a>
+          <a href="#" class="social-link" aria-label="Telegram">TG</a>
+          <a href="#" class="social-link" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Меню</p>
+        <ul class="footer-links">
+          <li><a href="#dishes">Авторские блюда</a></li>
+          <li><a href="#menu">Полное меню</a></li>
+          <li><a href="#offers">Бизнес-ланч</a></li>
+          <li><a href="#offers">Дегустационное меню</a></li>
+          <li><a href="#offers">Винная карта</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Ресторан</p>
+        <ul class="footer-links">
+          <li><a href="#story">О нас</a></li>
+          <li><a href="#team">Наши повара</a></li>
+          <li><a href="#gallery">Галерея</a></li>
+          <li><a href="#events">Банкеты</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Контакты</p>
+        <ul class="footer-links">
+          <li><a href="tel:+74950000000">+7 (495) 000-00-00</a></li>
+          <li><a href="mailto:reserve@noir-restaurant.ru">reserve@noir-restaurant.ru</a></li>
+          <li><a href="#contacts">ул. Большая Никитская, 12</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#booking">Забронировать</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2024 NOIR Restaurant. Все права защищены.</p>
+      <div class="footer-awards">
+        <span class="footer-award"><span>★</span> Michelin 2024</span>
+        <span class="footer-award"><span>★</span> Top 50 World</span>
+        <span class="footer-award"><span>★</span> Best Restaurant MSK</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+'use strict';
+
+/* ---- LOADER ---- */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 2400);
+});
+
+/* ---- HAMBURGER / MOBILE MENU ---- */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+
+function closeMobile() {
+  menuOpen = false;
+  hamburger.classList.remove('active');
+  mobileMenu.classList.remove('open');
+  mobileMenu.setAttribute('aria-hidden', 'true');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  hamburger.classList.toggle('active', menuOpen);
+  mobileMenu.classList.toggle('open', menuOpen);
+  mobileMenu.setAttribute('aria-hidden', String(!menuOpen));
+  hamburger.setAttribute('aria-expanded', String(menuOpen));
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+
+/* ---- STICKY NAV + FIXED BOOK BUTTON ---- */
+const nav = document.getElementById('mainNav');
+const fixedBook = document.getElementById('fixedBook');
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 80;
+  nav.classList.toggle('scrolled', scrolled);
+  fixedBook.classList.toggle('visible', window.scrollY > 500);
+}, { passive: true });
+
+/* ---- REVEAL ANIMATIONS ---- */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ---- COUNTER ANIMATION ---- */
+function animateCounter(el, target, duration = 2000, isFloat = false) {
+  const start = performance.now();
+  const update = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const val = isFloat ? (ease * target).toFixed(1) : Math.round(ease * target);
+    el.textContent = val;
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseFloat(el.dataset.counter || el.dataset.counterFloat);
+      const isFloat = !!el.dataset.counterFloat;
+      animateCounter(el, target, 2000, isFloat);
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-counter], [data-counter-float]').forEach(el => counterObs.observe(el));
+
+/* ---- RATING BARS ---- */
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const fill = e.target;
+      const width = fill.dataset.width;
+      setTimeout(() => { fill.style.width = width; }, 300);
+      barObs.unobserve(fill);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.rp-fill').forEach(el => barObs.observe(el));
+
+/* ---- MENU FILTER ---- */
+const catBtns = document.querySelectorAll('.menu-cat-btn');
+const menuItems = document.querySelectorAll('.menu-item');
+
+catBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    catBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    menuItems.forEach(item => {
+      const show = cat === 'all' || item.dataset.cat === cat;
+      item.style.display = show ? 'flex' : 'none';
+      item.style.animation = show ? 'fadeInUp 0.4s ease forwards' : 'none';
+    });
+  });
+});
+
+/* ---- REVIEWS SLIDER ---- */
+const track = document.getElementById('reviewsTrack');
+const dots = document.querySelectorAll('.reviews-dot');
+let currentSlide = 0;
+
+const slidesPerView = () => window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+
+function getCards() { return document.querySelectorAll('.review-card'); }
+
+function updateSlider() {
+  const gap = 24;
+  const perView = slidesPerView();
+  const cards = getCards();
+  const containerW = track.parentElement.offsetWidth;
+  const cardWidth = (containerW - gap * (perView - 1)) / perView;
+
+  // Задаём фиксированную ширину каждой карточке
+  cards.forEach(c => { c.style.minWidth = cardWidth + 'px'; c.style.width = cardWidth + 'px'; });
+
+  const offset = currentSlide * (cardWidth + gap);
+  track.style.transform = `translateX(-${offset}px)`;
+
+  const maxSlide = cards.length - perView;
+  dots.forEach((d, i) => {
+    const active = i === currentSlide;
+    d.classList.toggle('active', active);
+    d.setAttribute('aria-selected', String(active));
+  });
+
+  // Состояние кнопок
+  document.getElementById('reviewsPrev').style.opacity = currentSlide <= 0 ? '0.35' : '1';
+  document.getElementById('reviewsNext').style.opacity = currentSlide >= maxSlide ? '0.35' : '1';
+}
+
+document.getElementById('reviewsNext').addEventListener('click', () => {
+  const maxSlide = getCards().length - slidesPerView();
+  if (currentSlide < maxSlide) { currentSlide++; updateSlider(); }
+});
+
+document.getElementById('reviewsPrev').addEventListener('click', () => {
+  if (currentSlide > 0) { currentSlide--; updateSlider(); }
+});
+
+dots.forEach(d => {
+  d.addEventListener('click', () => {
+    currentSlide = Math.min(parseInt(d.dataset.index), getCards().length - slidesPerView());
+    updateSlider();
+  });
+});
+
+window.addEventListener('resize', () => { currentSlide = 0; updateSlider(); }, { passive: true });
+
+// Инициализация после загрузки
+window.addEventListener('load', updateSlider);
+updateSlider();
+
+/* ---- AUTO-SLIDE REVIEWS ---- */
+let autoSlide = setInterval(() => {
+  const maxSlide = getCards().length - slidesPerView();
+  currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+  updateSlider();
+}, 13000);
+
+track.parentElement.addEventListener('mouseenter', () => clearInterval(autoSlide));
+track.parentElement.addEventListener('mouseleave', () => {
+  autoSlide = setInterval(() => {
+    const maxSlide = getCards().length - slidesPerView();
+    currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+    updateSlider();
+  }, 5000);
+});
+
+/* ---- FAQ ---- */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('active');
+
+    document.querySelectorAll('.faq-q').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.style.maxHeight = '0';
+    });
+
+    if (!isOpen) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ---- COUNTDOWN TIMER ---- */
+function updateCountdown() {
+  const now = new Date();
+  const midnight = new Date();
+  midnight.setHours(23, 59, 59, 0);
+  const diff = midnight - now;
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  const hEl = document.getElementById('cd-h');
+  const mEl = document.getElementById('cd-m');
+  const sEl = document.getElementById('cd-s');
+  if (hEl) hEl.textContent = String(h).padStart(2, '0');
+  if (mEl) mEl.textContent = String(m).padStart(2, '0');
+  if (sEl) sEl.textContent = String(s).padStart(2, '0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ---- BOOKING FORM ---- */
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const fields = this.querySelectorAll('[required]');
+  let valid = true;
+  fields.forEach(f => {
+    if (!f.value.trim()) {
+      valid = false;
+      f.style.borderColor = 'rgba(107,30,46,0.7)';
+      setTimeout(() => f.style.borderColor = '', 2000);
+    }
+  });
+  if (!valid) return;
+  this.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+
+/* ---- SET MIN DATE FOR DATE INPUT ---- */
+const dateInput = document.getElementById('date');
+if (dateInput) {
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+}
+
+/* ---- PARALLAX ---- */
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const scrolled = window.scrollY;
+      const ambient = document.querySelector('.hero-ambient');
+      const ambient2 = document.querySelector('.hero-ambient-2');
+      if (ambient) ambient.style.transform = `translateY(${scrolled * 0.15}px)`;
+      if (ambient2) ambient2.style.transform = `translateY(${scrolled * 0.1}px)`;
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+/* ---- TOUCH SWIPE FOR SLIDER ---- */
+let touchStartX = 0;
+track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  const maxSlide = document.querySelectorAll('.review-card').length - slidesPerView();
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) currentSlide = Math.min(currentSlide + 1, maxSlide);
+    else currentSlide = Math.max(currentSlide - 1, 0);
+    updateSlider();
+  }
+}, { passive: true });
+
+/* ---- SMOOTH ANCHOR SCROLL ---- */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - offset,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+/* ---- DISH CARD HOVER PARTICLES ---- */
+document.querySelectorAll('.dish-card').forEach(card => {
+  card.addEventListener('mouseenter', function() {
+    this.querySelectorAll('.dish-dot').forEach((dot, i) => {
+      dot.style.animationDuration = (2 + i * 0.7) + 's';
+    });
+  });
+});
+
+/* ---- KEYBOARD NAV ---- */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menuOpen) closeMobile();
+});
+</script>
+</body>
+</html>
